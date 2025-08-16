@@ -18,6 +18,10 @@ jobs:
         with:
           go-version: '1.24.5'
 
+      - name: Get current datetime
+        id: datetime
+        run: echo "DATETIME=$(date +%Y-%m-%dT%H-%M-%S)" >> $GITHUB_OUTPUT
+
       - name: Build binary
         env:
           GOOS: linux
@@ -35,11 +39,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create release-test-v1 \
-            --title "Release release-test-v1" \
-            --notes "## Changes in release-test-v1
+          RELEASE_TAG="release-${{ steps.datetime.outputs.DATETIME }}"
+          gh release create "${RELEASE_TAG}" \
+            --title "Release ${RELEASE_TAG}" \
+            --notes "## Changes in ${RELEASE_TAG}
 
           自動生成されたリリースです。
+
+          **リリース日時:** ${{ steps.datetime.outputs.DATETIME }}
 
           ### ダウンロード
           - Linux (amd64): test-go-release_linux_amd64.tar.gz" \
