@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: GitHub Actions Test
 run-name: ${{ github.actor }}
 on: [push]
 
@@ -10,4 +10,5 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.24.5'
+      - name: go version
         run: go version
