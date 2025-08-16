@@ -1,0 +1,9 @@
+{
+    "name": "test-go-release",
+    "image": "mcr.microsoft.com/devcontainers/go",
+    "customizations": {
+        "vscode": {
+            "extensions": []
+        }
+    }
+}
