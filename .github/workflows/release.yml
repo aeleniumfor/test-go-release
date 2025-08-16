@@ -1,9 +1,6 @@
 name: Release
 
-on:
-  push:
-    tags:
-      - 'v*'
+on: [push]
 
 permissions:
   contents: write
@@ -21,10 +18,6 @@ jobs:
         with:
           go-version: '1.24.5'
 
-      - name: Get version from tag
-        id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-
       - name: Build binary
         env:
           GOOS: linux
@@ -40,6 +33,6 @@ jobs:
 
       - name: Create Release with gh
         run: |
-          gh release create ${{ steps.version.outputs.VERSION }} \
-            --title "Release ${{ steps.version.outputs.VERSION }}" \
-            --notes "## Changes in ${{ steps.version.outputs.VERSION }}
+          gh release create release-test-v1 \
+            --title "Release release-test-v1" \
+            --notes "## Changes in release-test-v1
